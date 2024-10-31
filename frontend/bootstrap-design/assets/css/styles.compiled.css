@@ -1,0 +1,22 @@
+.link-color {
+  color: #0d6efd;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: #0d6efd;
+}
+
+.app-btn {
+  color: #8b34ab !important;
+  font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  .list-group-vertical-md {
+    flex-direction: column;
+  }
+}

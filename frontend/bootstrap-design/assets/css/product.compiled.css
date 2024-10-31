@@ -1,0 +1,6 @@
+.gallery-col {
+  border-radius: 5%;
+}
+.gallery-col:hover {
+  border: 2px solid #7b189f;
+}

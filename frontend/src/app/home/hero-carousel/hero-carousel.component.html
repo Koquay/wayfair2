@@ -1,0 +1,10 @@
+<section id="hero">
+    <div class="wrapper">
+        <owl-carousel-o [options]="customOptions">
+            <ng-template *ngFor="let img of heroCarouselImages" carouselSlide>
+                <img src="assets/img/{{img}}" alt="Slide Image" class="w-100 d-block" [owlRouterLink]="['/product']"
+                    [owlRouterLink]="['/product']">
+            </ng-template>
+        </owl-carousel-o>
+    </div>
+</section>
