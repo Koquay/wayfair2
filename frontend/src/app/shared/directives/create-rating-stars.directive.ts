@@ -28,7 +28,7 @@ export class CreateRatingStarsDirective {
       clonedNode = nativeElement.childNodes[0].cloneNode(true);          
       const ratingSpan = this.renderer?.createElement('span');
   
-      this.createStars(ratingSpan, rating, 'gold-color')
+      this.createStars(ratingSpan, rating, 'primary-color')
       this.createStars(ratingSpan, 5-rating, '#888898')
   
       clonedNode.appendChild(ratingSpan);
@@ -43,7 +43,7 @@ export class CreateRatingStarsDirective {
         this.renderer.addClass(ratingIcon, "fa")
         this.renderer.addClass(ratingIcon, "fa-star")
   
-        if(color === 'gold-color') {
+        if(color === 'primary-color') {
           this.renderer.addClass(ratingIcon, color)  
         } else {
           this.renderer.setStyle(ratingIcon, "color", color); 

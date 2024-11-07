@@ -21,13 +21,41 @@ export class ProductSidenavModel {
             ],
     };
 
-    priceRange = {
+    priceFilter = {
         title: 'Price',
-        min: 0,
-        max: 10000,
-        step:10,
-        selectedPrice: 10000
-    };
+        priceRange: [
+          {
+            range: { low: 1, high: 500 },
+            label: 'Under $500',
+            checked: false,
+          },
+          {
+            range: { low: 500, high: 1000 },
+            label: '$500 - $1000',
+            checked: false,
+          },
+          {
+            range: { low: 1000, high: 2000 },
+            label: '$1000 - $2000',
+            checked: false,
+          },
+          {
+              range: { low: 2000, high: 3000 },
+              label: '$2000 - $3000',
+              checked: false,
+            },
+            {
+                range: { low: 3000, high: 4000 },
+                label: '$3000 - $4000',
+                checked: false,
+              },
+            {
+              range: { low: 4000, high: 111111111 },
+              label: 'Over $4000',
+              checked: false,
+            }
+        ],
+      };
     
     ratings = {
         title: 'Ratings',
@@ -57,6 +85,6 @@ export class ProductSidenavModel {
     };
 
     pageNo= 1;
-    pageSize= 8;
+    pageSize= 9;
     pageSizeOptions = [5, 10, 15];
 }

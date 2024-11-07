@@ -57,23 +57,23 @@ exports.getProducts = async (req, res) => {
       productCountPipeline.push(categoriesMatch);
     }
   
-    // let priceMatch = buildPriceRangeMatch(priceRanges);
-    // if (priceMatch) {
-    //   aggregatePipeline.push(priceMatch);
-    //   productCountPipeline.push(priceMatch);
-    // }
+    let priceMatch = buildPriceRangeMatch(priceRanges);
+    if (priceMatch) {
+      aggregatePipeline.push(priceMatch);
+      productCountPipeline.push(priceMatch);
+    }
   
-    // let ratingMatch = buildRatingMatch(ratings);
-    // if (ratingMatch) {
-    //     aggregatePipeline.push(ratingMatch)
-    //     productCountPipeline.push(ratingMatch);
-    // }
+    let ratingMatch = buildRatingMatch(ratings);
+    if (ratingMatch) {
+        aggregatePipeline.push(ratingMatch)
+        productCountPipeline.push(ratingMatch);
+    }
   
     // aggregatePipeline.push(buildSortMatch(sortFilter));
     checkForEmptyAggregate(aggregatePipeline);
     checkForEmptyAggregate(productCountPipeline);
-    // aggregatePipeline.push(buildPageNumberFilter(pageNo, pageSize));
-    // aggregatePipeline.push(buildPageSizeFilter(pageSize));
+    aggregatePipeline.push(buildPageNumberFilter(pageNo, pageSize));
+    aggregatePipeline.push(buildPageSizeFilter(pageSize));
   
     return aggregatePipeline;
   };

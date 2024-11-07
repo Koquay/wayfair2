@@ -8,15 +8,14 @@ import { catchError, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-
-  public productSignal = signal<{ products?:ProductModel[]; productCount?:number }>({})
+  public productSignal = signal<{ products:ProductModel[]; productCount?:number }>({ products:[], productCount: 0})
   private url = '/api/product';
 
   constructor(
     private httpClient:HttpClient,) { }
 
   public getProducts = (productSidenav:ProductSidenavModel) => {
-    const sidenavFilters = this.getSidenavFilters(productSidenav);
+    const sidenavFilters = this.getSelectedFilters(productSidenav);
 
     const params = new HttpParams({
       fromObject: { sidenavFilters },
@@ -40,8 +39,8 @@ export class ProductService {
   };
 
 
-  private getSidenavFilters(productSidenav:ProductSidenavModel) {
-    console.log('ProductService.getSidenavFilters', productSidenav);
+  private getSelectedFilters(productSidenav:ProductSidenavModel) {
+    console.log('ProductService.getSelectedFilters', productSidenav);
     const categoryFilters = productSidenav.category.categories.filter(
       (category:any) => category.checked
     );
@@ -53,28 +52,32 @@ export class ProductService {
       categories.push(category.name);
     }
 
-    // const range = {low: productSidenav.priceRange.min, high: productSidenav.priceRange.selectedPrice}
+    const priceFilters = productSidenav.priceFilter.priceRange.filter(
+      (range) => range.checked
+    );
 
-    // const priceRanges = [];
-    // priceRanges.push(range);
-    
-    // console.log('ProductService.priceRanges', priceRanges);
+    console.log('ProductService.priceFilters', priceFilters);
+
+    const priceRanges = [];
+    for (let priceRange of priceFilters) {
+      priceRanges.push(priceRange.range);
+    }
  
-    // const ratingFilters = productSidenav.ratings.ratings.filter(
-    //   (filter:any) => filter.checked
-    // );
-    // console.log('ProductService.ratingFilters', ratingFilters);
+    const ratingFilters = productSidenav.ratings.ratings.filter(
+      (filter:any) => filter.checked
+    );
+    console.log('ProductService.ratingFilters', ratingFilters);
 
-    // const ratings:number[] = [];
+    const ratings:number[] = [];
 
-    // for (let rating of ratingFilters) {
-    //   ratings.push(rating.rating);
-    // }
+    for (let rating of ratingFilters) {
+      ratings.push(rating.rating);
+    }
 
     const filters = {
       categories,
-      // priceRanges: priceRanges,
-      // ratings: ratings,
+      priceRanges,
+      ratings,
       pageNo: productSidenav.pageNo,
       pageSize: productSidenav.pageSize,
     };

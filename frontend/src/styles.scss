@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: Roboto, sans-serif;
+}
+
+.link-color {
+    color: #0d6efd;
+}
+
+a {
+    color: inherit !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    &:hover {
+        color: #0d6efd !important;
+    }
+}
+
+.app-btn {
+    color: #8b34ab !important;
+    font-weight: bold;
+}

@@ -12,4 +12,8 @@ export class ProductSidenavService {
     this.productSidenavSignal.set({ ...productSidenav })
     console.log('ProductSidenavService.productSidenavSignal', this.productSidenavSignal())
   }
+
+  public setPage = (pageNo:number) => {
+    this.productSidenavSignal.set({ ...this.productSidenavSignal(), pageNo })
+  }
 }

@@ -73,6 +73,7 @@ x. Store hero-carousel's images in HeroCarouselService
 -- get products
 
 10. Create server on backend
+-- npm -y (to create package.json)
 -- configure middlewares
 -- start nodemon
 -- create server routes

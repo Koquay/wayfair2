@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -15,5 +16,12 @@ import { FooterComponent } from './shared/components/footer/footer.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'Wayfair';
+
+    private appService = inject(AppService);
+
+
+  ngOnInit() {
+    this.appService.restoreStateFromLocalStorage();  
+  }
 }
