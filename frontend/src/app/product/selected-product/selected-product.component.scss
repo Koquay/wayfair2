@@ -1,0 +1,27 @@
+.selected-product-gallery {
+    display: flex;
+    flex-direction: row !important;
+    
+    @media (min-width:768px) {
+        flex-direction: column !important;
+    }
+  }
+
+  .currentImg {
+    min-width: 455px; min-height: 455px;
+
+    @media (min-width:993px) {
+        min-width: 655px; min-height: 555px;
+    }
+  }
+
+  .gallery-product {
+    border: 4px solid #7b189f;
+    
+  }
+
+  .addToCartHover {
+    &:hover {
+      opacity: 80%;
+    }
+  }

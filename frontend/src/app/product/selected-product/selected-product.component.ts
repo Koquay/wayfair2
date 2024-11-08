@@ -1,12 +1,77 @@
-import { Component } from '@angular/core';
+import { Component, effect, inject, untracked } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProductService } from '../product.service';
+import { ProductModel } from '../product.model';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { CreateRatingStarsDirective } from '../../shared/directives/create-rating-stars.directive';
+import { DiscountPricePipe } from '../../shared/pipes/discount-price.pipe';
+import { CartItem } from '../../cart/cart-item.model';
+import { CartService } from '../../cart/cart.service';
+import { AppService } from '../../app.service';
 
 @Component({
   selector: 'app-selected-product',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CreateRatingStarsDirective,
+    DiscountPricePipe
+  ],
   templateUrl: './selected-product.component.html',
   styleUrl: './selected-product.component.scss'
 })
 export class SelectedProductComponent {
+  private activatedRoute = inject(ActivatedRoute)
+  private productService = inject(ProductService)
+  private cartService = inject(CartService)
+  
+  public selectedProduct?:ProductModel;
+  public currentImg = '';
+  public quantity = 1;
 
+  public appService = inject(AppService)
+
+  ngOnInit() {
+    this.getSelectedProduct();
+  }
+
+  private getSelectedProduct = () => {
+    const productId = this.activatedRoute.snapshot.paramMap.get('productId');
+    console.log('selectedProduct', productId)
+    if(productId !== null) {
+      this.productService.getSelectedProduct(productId).subscribe(product => {
+        this.selectedProduct = product;
+
+        if(!this.selectedProduct) {
+          this.selectedProduct = this.appService.appSignal().wayfair2.selectedProduct;
+        }
+
+        if(this.selectedProduct) {
+          this.currentImg = this.selectedProduct?.images[0]
+        }
+        
+      })
+    }
+    
+  }
+
+  public addToCart = () => {
+    this.cartService.addToCart(new CartItem(this.selectedProduct as ProductModel, this.quantity))
+  }
+
+  public increaseQuantity = () => {
+    this.quantity++;
+  }
+
+  public decreaseQuantity = () => {
+    if(this.quantity > 1) {
+      this.quantity--;
+    }    
+  }
+
+  public setCurrentImg = (img:string) => {
+    this.currentImg = img
+  }
 }

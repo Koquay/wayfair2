@@ -13,8 +13,6 @@ export class CartService {
   public appService = inject(AppService)
   
 
-  constructor() { }
-
   private appEffect = effect(() => {    
     let cartItems:CartItem[] = this.appService.appSignal().wayfair2.cartItems;
     console.log('cartItems', cartItems)
@@ -55,6 +53,5 @@ export class CartService {
     const cartItems = this.cartSignal().cartItems.filter(item => item.product._id !== productId);
     this.cartSignal.set({cartItems:[...cartItems]})
     saveStateToLocalStorage(this.cartSignal())
-    console.log('CartService.removeItemFromCart cartSignal', this.cartSignal())
   }
 }

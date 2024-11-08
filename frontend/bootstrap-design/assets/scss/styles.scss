@@ -15,19 +15,6 @@ a {
     font-weight: bold;
 }
 
-// @media (min-width:768px) {
-//   .list-group-vertical-md {
-//     flex-direction: row !important;
-//   }
-// }
 
-.selected-product-gallery {
-  flex-direction: column !important;
-  @media (min-width:768px) {
-    // .list-group-vertical-md {
-      flex-direction: row !important;
-    // }
-  }
-}
 
 

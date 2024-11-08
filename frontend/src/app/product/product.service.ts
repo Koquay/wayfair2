@@ -2,7 +2,8 @@ import { Injectable, signal } from '@angular/core';
 import { ProductModel } from './product.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ProductSidenavModel } from './product-sidenav/product-sidenav.model';
-import { catchError, tap } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
+import { saveStateToLocalStorage } from '../shared/utils/localStorageUtils';
 
 @Injectable({
   providedIn: 'root'
@@ -84,5 +85,13 @@ export class ProductService {
 
     console.log('filters', filters);
     return JSON.stringify(filters);
+  }
+
+  public getSelectedProduct = (productId:string) => {
+    const product = this.productSignal().products.find(product => product._id === productId)
+    if(product) {
+      saveStateToLocalStorage({selectedProduct: product})
+    }    
+    return of(product)
   }
 }
