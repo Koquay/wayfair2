@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CreateRatingStarsDirective } from '../shared/directives/create-rating-stars.directive';
 import { DiscountPricePipe } from '../shared/pipes/discount-price.pipe';
+import { CartSummaryComponent } from './cart-summary/cart-summary.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -11,6 +13,8 @@ import { DiscountPricePipe } from '../shared/pipes/discount-price.pipe';
   imports: [
     CommonModule,
     FormsModule,
+    RouterLink,
+    CartSummaryComponent,
     CreateRatingStarsDirective,
     DiscountPricePipe
   ],

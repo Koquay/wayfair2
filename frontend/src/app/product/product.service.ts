@@ -2,15 +2,16 @@ import { Injectable, signal } from '@angular/core';
 import { ProductModel } from './product.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ProductSidenavModel } from './product-sidenav/product-sidenav.model';
-import { catchError, of, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { saveStateToLocalStorage } from '../shared/utils/localStorageUtils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  public productSignal = signal<{ products:ProductModel[]; productCount?:number }>({ products:[], productCount: 0})
+  public productSignal = signal<{ products:ProductModel[]; selectedProduct:ProductModel; productCount?:number }>({ products:[], selectedProduct: new ProductModel(), productCount: 0})
   private url = '/api/product';
+  public selectedProduct?:ProductModel;
 
   constructor(
     private httpClient:HttpClient,) { }
@@ -27,7 +28,7 @@ export class ProductService {
       .pipe(
         tap((productData) => {
           console.log('productData', productData);
-          this.productSignal.set({ ...productData })
+          this.productSignal.set({ ...productData, selectedProduct: this.selectedProduct as ProductModel})
           console.log('ProductService.productSignal', this.productSignal())
         }),
         catchError(error => {
@@ -87,11 +88,11 @@ export class ProductService {
     return JSON.stringify(filters);
   }
 
-  public getSelectedProduct = (productId:string) => {
-    const product = this.productSignal().products.find(product => product._id === productId)
-    if(product) {
-      saveStateToLocalStorage({selectedProduct: product})
-    }    
-    return of(product)
+  public getSelectedProduct = (productId:string) : Observable<ProductModel> => {
+    const product = this.productSignal().products.find(product => product._id === productId) as ProductModel
+
+    saveStateToLocalStorage({selectedProduct: product})
+    this.productSignal.set({ ...this.productSignal(), selectedProduct:product})
+    return of(product) as Observable<ProductModel>
   }
 }

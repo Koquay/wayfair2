@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
+import { ProductService } from '../../../product/product.service';
+import { ProductModel } from '../../../product/product.model';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -13,32 +14,26 @@ import { CommonModule } from '@angular/common';
   styleUrl: './breadcrumbs.component.scss'
 })
 export class BreadcrumbsComponent {
+
+  private productService = inject(ProductService)
+  private router = inject(Router)
+  
   public breadcrumbs = [{label:'', url:''}];
   public productBrand:string = '';
-  public productId = null;
+  public productId = '';
+  private selectedProduct?:ProductModel;
 
-  constructor(
-    private router: Router,
-    private store: Store<{ productReducer:any }>
-  ) {}
+  private productEffect = effect(() => {    
+    this.selectedProduct = this.productService.productSignal().selectedProduct;
+    this.productBrand = this.selectedProduct?.name;
+    this.productId = this.selectedProduct?._id;
+    
+    console.log('Breadcrumb.selectedProduct', this.selectedProduct)
+  });
 
   ngOnInit(): void {
-    this.subscribeToRedux();
     this.buildBreadcrumbs();    
   }
-
-  private subscribeToRedux = () => {
-    const productReducerObservable$ = this.store.select((state) => {
-      return state.productReducer;
-    });
-
-    console.log('Breadcrumbs.productReducerObservable$', productReducerObservable$)
-
-    productReducerObservable$.subscribe((productData) => { 
-      this.productBrand = productData?.product?.brand || 'product'
-      this.productId = productData?.product?._id ;
-    });
-  };
 
   private buildBreadcrumbs = () => {
     this.breadcrumbs.shift();
@@ -58,7 +53,7 @@ export class BreadcrumbsComponent {
 
         if(url.startsWith('/selected-product')) {     
           // label = this.productName?.substring(0, 20).trim() + '...'
-          label = this.productBrand;
+          label = this.productBrand || 'Selected Product';
         }
 
         let breadcrumb = { label, url };
@@ -72,14 +67,14 @@ export class BreadcrumbsComponent {
 
         if (this.breadcrumbs.length === 1) {
           if (breadcrumb.url !== '/home') {
-            let state = JSON.parse(localStorage.getItem('amazonYT') as string);
+            let state = JSON.parse(localStorage.getItem('wayfair2') as string);
             this.breadcrumbs = state.breadcrumbs;
           }
         }
 
-        let state = JSON.parse(localStorage.getItem('amazonYT') as string) || {};
+        let state = JSON.parse(localStorage.getItem('wayfair2') as string) || {};
         state.breadcrumbs = this.breadcrumbs;
-        localStorage.setItem('amazonYT', JSON.stringify(state));
+        localStorage.setItem('wayfair2', JSON.stringify(state));
         
       }
     });

@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { AppService } from './app.service';
+import { BreadcrumbsComponent } from './shared/components/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,8 @@ import { AppService } from './app.service';
   imports: [
     RouterOutlet,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    BreadcrumbsComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

@@ -1,0 +1,28 @@
+<div>
+    <h5 class="fw-bold d-inline-block me-2">Cart Summary</h5>
+    <span>({{cartItems?.length}})</span>
+    <div class="table-responsive">
+        <table class="table table-sm">
+            <tbody>
+                <tr>
+                    <td>Item Subtotal ({{cartItems?.length}})</td>
+                    <td class="text-end">{{getSubtotal() | currency}}</td>
+                </tr>
+                <tr>
+                    <td>Delivery</td>
+                    <td class="text-end">FREE</td>
+                </tr>
+                <tr>
+                    <td>Estimated Tax</td>
+                    <td class="text-end">{{getTax() | currency}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr class="fw-bold" style="font-size: 18px;">
+                    <td>Total</td>
+                    <td class="text-end">{{getTotal() | currency}}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
