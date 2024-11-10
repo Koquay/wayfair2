@@ -28,7 +28,7 @@ export class BreadcrumbsComponent {
     this.productBrand = this.selectedProduct?.name;
     this.productId = this.selectedProduct?._id;
     
-    console.log('Breadcrumb.selectedProduct', this.selectedProduct)
+    console.dir('Breadcrumb.selectedProduct', this.selectedProduct)
   });
 
   ngOnInit(): void {
@@ -42,7 +42,7 @@ export class BreadcrumbsComponent {
         let url = this.router.url;                
 
         let label = url.substring(1);
-        console.log('url', url);        
+        console.dir('url', url);        
 
         if (label.includes('/')) {
           let index = label.indexOf('/');
@@ -63,7 +63,7 @@ export class BreadcrumbsComponent {
         );
         this.breadcrumbs?.push(breadcrumb);
 
-        console.log('breadcrumbs', this.breadcrumbs);
+        console.dir('breadcrumbs', this.breadcrumbs);
 
         if (this.breadcrumbs.length === 1) {
           if (breadcrumb.url !== '/home') {

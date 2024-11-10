@@ -20,7 +20,7 @@ export class ProductSidenavComponent {
   public productSidenav = this.productSidenavService.productSidenavSignal();
 
   public getProducts = () => {
-    console.log('productSidenav', this.productSidenav)
+    console.dir('productSidenav', this.productSidenav)
     this.productSidenavService.updateProductSidenav(this.productSidenav)
   }
 }

@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { CartItem } from '../cart-item.model';
+import { Component, effect, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-cart-summary',
@@ -12,11 +12,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './cart-summary.component.scss'
 })
 export class CartSummaryComponent {
-  @Input() cartItems?:CartItem[];
 
-  ngOnInit() {
-    console.log('CartSummary.cartItems', this.cartItems)
-  }
+  public cartService = inject(CartService)
+  public cartItems = this.cartService.cartSignal().cartItems;
+
+  private cartEffect = effect(() => {    
+    this.cartItems = this.cartService.cartSignal().cartItems;
+    console.dir('CartSummaryComponent.cartItems', this.cartItems)
+  });
 
   public getSubtotal = () => {
     let subtotal = 0;

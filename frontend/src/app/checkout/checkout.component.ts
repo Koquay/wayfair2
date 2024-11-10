@@ -1,14 +1,16 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { CheckoutService } from './checkout.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CartSummaryComponent } from '../cart/cart-summary/cart-summary.component';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    CartSummaryComponent
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss'
@@ -47,8 +49,17 @@ expirationYears = [
     "2034",
 ]
 
+private checkoutEffect = effect(() => {    
+  this.checkoutData = this.checkoutService.checkoutSignal().checkoutData;
+  console.dir('CheckoutComponent.checkoutData', this.checkoutData)
+});
 
-  public saveToDatastore = () => {
-    console.dir('CheckoutComponent.checkoutData', this.checkoutData)
+  public saveToCheckoutSignal = () => {
+    // console.dir('CheckoutComponent.checkoutData', this.checkoutData)
+    this.checkoutService.saveToCheckoutSignal(this.checkoutData)
+  }
+
+  public placeOrder = () => {
+    
   }
 }

@@ -23,12 +23,12 @@ export class PaginationComponent {
   public productCount:any;
 
   private productSidenavEffect = effect(() => {    
-    console.log('PaginationComponent.productSidenav', this.productSidenavService.productSidenavSignal());
+    console.dir('PaginationComponent.productSidenav', this.productSidenavService.productSidenavSignal());
   });
 
   private productEffect = effect(() => {    
     this.products = this.productService.productSignal();
-    console.log('PaginationComponent.products', this.products)
+    console.dir('PaginationComponent.products', this.products)
 
     this.productCount = this.products.productCount;
     this.numberOfPages = Math.ceil(

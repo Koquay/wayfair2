@@ -15,7 +15,7 @@ export class CartService {
 
   private appEffect = effect(() => {    
     let cartItems:CartItem[] = this.appService.appSignal().wayfair2.cartItems;
-    console.log('cartItems', cartItems)
+    console.dir('cartItems', cartItems)
 
     untracked(() => { 
       if(cartItems?.length) {
@@ -24,7 +24,7 @@ export class CartService {
       
     });
     
-      console.log('cartSignal.cartItems', this.cartSignal().cartItems)
+      console.dir('cartSignal.cartItems', this.cartSignal().cartItems)
 
   });
 

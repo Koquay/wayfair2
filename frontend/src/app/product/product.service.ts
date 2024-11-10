@@ -27,12 +27,12 @@ export class ProductService {
       .get<{ products:ProductModel[]; productCount:number }>(this.url, { params }) 
       .pipe(
         tap((productData) => {
-          console.log('productData', productData);
+          console.dir('productData', productData);
           this.productSignal.set({ ...productData, selectedProduct: this.selectedProduct as ProductModel})
-          console.log('ProductService.productSignal', this.productSignal())
+          console.dir('ProductService.productSignal', this.productSignal())
         }),
         catchError(error => {
-          console.log('error', error)
+          console.dir('error', error)
           // this.toastr.error('Problem getting products', 'Get Products')
           throw error;
         }) 
@@ -42,11 +42,11 @@ export class ProductService {
 
 
   private getSelectedFilters(productSidenav:ProductSidenavModel) {
-    console.log('ProductService.getSelectedFilters', productSidenav);
+    console.dir('ProductService.getSelectedFilters', productSidenav);
     const categoryFilters = productSidenav.category.categories.filter(
       (category:any) => category.checked
     );
-    console.log('ProductService.categoryFilters', categoryFilters);
+    console.dir('ProductService.categoryFilters', categoryFilters);
 
     const categories:string[] = [];
 
@@ -58,7 +58,7 @@ export class ProductService {
       (range) => range.checked
     );
 
-    console.log('ProductService.priceFilters', priceFilters);
+    console.dir('ProductService.priceFilters', priceFilters);
 
     const priceRanges = [];
     for (let priceRange of priceFilters) {
@@ -68,7 +68,7 @@ export class ProductService {
     const ratingFilters = productSidenav.ratings.ratings.filter(
       (filter:any) => filter.checked
     );
-    console.log('ProductService.ratingFilters', ratingFilters);
+    console.dir('ProductService.ratingFilters', ratingFilters);
 
     const ratings:number[] = [];
 
@@ -84,7 +84,7 @@ export class ProductService {
       pageSize: productSidenav.pageSize,
     };
 
-    console.log('filters', filters);
+    console.dir('filters', filters);
     return JSON.stringify(filters);
   }
 

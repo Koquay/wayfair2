@@ -36,13 +36,13 @@ export class ProductComponent {
   public currentGalleryImg?:string;
 
   private productSidenavEffect = effect(() => {    
-    console.log('ProductComponent.productSidenav', this.productSidenavService.productSidenavSignal());
+    console.dir('ProductComponent.productSidenav', this.productSidenavService.productSidenavSignal());
     this.productService.getProducts(this.productSidenavService.productSidenavSignal());
   });
 
   private productEffect = effect(() => {    
     this.products = this.productService.productSignal();
-    console.log('ProductComponent.products', this.products)
+    console.dir('ProductComponent.products', this.products)
 
     // if(this.products?.products[0]) {
     //   this.setCurrentGalleryImg(this.products?.products[0].images[0])
@@ -55,7 +55,7 @@ export class ProductComponent {
   }
 
   public isImgClicked(imgEl:HTMLImageElement, img:string) {
-    // console.log(img, imgEl.src.substring(imgEl.src.indexOf("assets/img/")+11))
+    // console.dir(img, imgEl.src.substring(imgEl.src.indexOf("assets/img/")+11))
     return imgEl.src.substring(imgEl.src.indexOf("assets/img/")+11).trim().replace('%20', ' ') === img.trim().replace('%20', ' ');
   }
 

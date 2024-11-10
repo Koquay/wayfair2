@@ -27,7 +27,7 @@ export class CartComponent {
 
   private cartEffect = effect(() => {    
     this.cartItems = this.cartService.cartSignal().cartItems;
-    console.log('cartComponent.cartItems', this.cartItems)
+    console.dir('cartComponent.cartItems', this.cartItems)
   });
 
   public decreaseProductQuantity = (productId:string, quantity:number) => {

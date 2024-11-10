@@ -10,7 +10,7 @@ export class ProductSidenavService {
 
    public updateProductSidenav(productSidenav:ProductSidenavModel): void {
     this.productSidenavSignal.set({ ...productSidenav })
-    console.log('ProductSidenavService.productSidenavSignal', this.productSidenavSignal())
+    console.dir('ProductSidenavService.productSidenavSignal', this.productSidenavSignal())
   }
 
   public setPage = (pageNo:number) => {

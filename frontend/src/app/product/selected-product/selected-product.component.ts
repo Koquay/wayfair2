@@ -39,7 +39,7 @@ export class SelectedProductComponent {
 
   private getSelectedProduct = () => {
     const productId = this.activatedRoute.snapshot.paramMap.get('productId') as string;
-    console.log('selectedProduct', productId)
+    console.dir('selectedProduct', productId)
     if(productId !== null) {
       this.productService.getSelectedProduct(productId).subscribe(product => {
         this.selectedProduct = product;
