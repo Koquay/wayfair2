@@ -12,7 +12,7 @@ import { BreadcrumbsComponent } from './shared/components/breadcrumbs/breadcrumb
     RouterOutlet,
     HeaderComponent,
     FooterComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

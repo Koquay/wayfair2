@@ -1,5 +1,5 @@
 <div class="container mt-5">
-    <form>
+    <form #checkoutForm="ngForm">
         <section>
             <div class="row">
                 <div class="col col-12 col-lg-8">
@@ -174,8 +174,8 @@
                     <div class="p-4" style="border: 3px solid #8b34ab ;">
                         <app-cart-summary />
 
-                        <button class="btn btn-bg-color w-100 fw-bold" type="button" (click)="placeOrder()"
-                            style="background: #8b34ab;">Place order</button>
+                        <button class="btn btn-bg-color w-100 fw-bold" [disabled]="!checkoutForm.valid" type="button"
+                            (click)="placeOrder()" style="background: #8b34ab; color: white;">Place order</button>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,12 @@
+.selected-product-gallery {
+    display: flex;
+  flex-direction: row !important;
+  
+  @media (min-width:768px) {
+    // .list-group-vertical-md {
+      flex-direction: column !important;
+    // }
+  }
+}
+
+// list-group-horizontal-sm list-group list-group-vertical-md

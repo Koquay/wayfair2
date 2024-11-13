@@ -11,6 +11,7 @@ import { ProductModel } from './product.model';
 import { CartService } from '../cart/cart.service';
 import { CartItem } from '../cart/cart-item.model';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product',
@@ -34,6 +35,7 @@ export class ProductComponent {
   public productSidenav = this.productSidenavService.productSidenavSignal();
   public products = this.productService.productSignal();
   public currentGalleryImg?:string;
+  private toastr = inject(ToastrService)
 
   private productSidenavEffect = effect(() => {    
     console.dir('ProductComponent.productSidenav', this.productSidenavService.productSidenavSignal());
@@ -60,7 +62,14 @@ export class ProductComponent {
   }
 
   public addToCart = (product:ProductModel) => {
-    this.cartService.addToCart(new CartItem(product, 1))
+    try {
+      this.cartService.addToCart(new CartItem(product, 1))
+    } catch (e) {
+      this.toastr.success('There was a problem adding your item to cart.', '');
+      throw e;
+    } finally {
+      this.toastr.success('Item successfully added to cart.', '');
+    }
   }
 
 }

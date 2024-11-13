@@ -60,6 +60,6 @@ private checkoutEffect = effect(() => {
   }
 
   public placeOrder = () => {
-    
+    this.checkoutService.placeOrder();
   }
 }

@@ -1,3 +1,5 @@
+import { CartItem } from "../cart/cart-item.model";
+
 export class CheckoutModel {
 
     deliveryAddress = {
@@ -18,5 +20,5 @@ export class CheckoutModel {
         defaultCreditCard: true,
     };
 
-    items: any
+    items: CartItem[] = [];
 }

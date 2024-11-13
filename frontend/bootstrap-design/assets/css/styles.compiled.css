@@ -20,3 +20,6 @@ a:hover {
     flex-direction: column;
   }
 }
+.red {
+  color: red;
+}

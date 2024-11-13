@@ -3,7 +3,6 @@ import { NavigationEnd, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../../product/product.service';
 import { ProductModel } from '../../../product/product.model';
-
 @Component({
   selector: 'app-breadcrumbs',
   standalone: true,
@@ -14,7 +13,6 @@ import { ProductModel } from '../../../product/product.model';
   styleUrl: './breadcrumbs.component.scss'
 })
 export class BreadcrumbsComponent {
-
   private productService = inject(ProductService)
   private router = inject(Router)
   
@@ -75,7 +73,6 @@ export class BreadcrumbsComponent {
         let state = JSON.parse(localStorage.getItem('wayfair2') as string) || {};
         state.breadcrumbs = this.breadcrumbs;
         localStorage.setItem('wayfair2', JSON.stringify(state));
-        
       }
     });
   };

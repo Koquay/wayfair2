@@ -2,6 +2,7 @@ import { effect, inject, Injectable, signal, untracked } from '@angular/core';
 import { CartItem } from './cart-item.model';
 import { saveStateToLocalStorage } from '../shared/utils/localStorageUtils';
 import { AppService } from '../app.service';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

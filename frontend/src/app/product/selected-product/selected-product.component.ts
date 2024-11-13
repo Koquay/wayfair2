@@ -9,6 +9,7 @@ import { DiscountPricePipe } from '../../shared/pipes/discount-price.pipe';
 import { CartItem } from '../../cart/cart-item.model';
 import { CartService } from '../../cart/cart.service';
 import { AppService } from '../../app.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-selected-product',
@@ -26,6 +27,7 @@ export class SelectedProductComponent {
   private activatedRoute = inject(ActivatedRoute)
   private productService = inject(ProductService)
   private cartService = inject(CartService)
+  private toastr = inject(ToastrService)
   
   public selectedProduct?:ProductModel;
   public currentImg = '';
@@ -58,7 +60,14 @@ export class SelectedProductComponent {
   }
 
   public addToCart = () => {
-    this.cartService.addToCart(new CartItem(this.selectedProduct as ProductModel, this.quantity))
+    try {
+      this.cartService.addToCart(new CartItem(this.selectedProduct as ProductModel, this.quantity))
+    } catch (e) {
+      this.toastr.success('There was a problem adding your item to cart.', '');
+      throw e;
+    } finally {
+      this.toastr.success('Item successfully added to cart.', '');
+    }
   }
 
   public increaseQuantity = () => {

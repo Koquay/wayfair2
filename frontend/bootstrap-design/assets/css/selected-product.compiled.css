@@ -1,0 +1,9 @@
+.selected-product-gallery {
+  display: flex;
+  flex-direction: row !important;
+}
+@media (min-width: 768px) {
+  .selected-product-gallery {
+    flex-direction: column !important;
+  }
+}

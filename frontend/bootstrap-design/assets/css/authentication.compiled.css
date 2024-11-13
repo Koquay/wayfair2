@@ -1,0 +1,8 @@
+#signup {
+  width: 100%;
+}
+@media (min-width: 993px) {
+  #signup {
+    width: 50%;
+  }
+}
