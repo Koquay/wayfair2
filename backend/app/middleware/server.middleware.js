@@ -8,7 +8,7 @@ process.env.DIST = path.join(__dirname, "../../../frontend/dist/frontend/browser
 process.env.INDEX = path.join(process.env.DIST, "/index.html");
 
 module.exports = (app) => {
-    console.log('** MIDDLEWARE CONFIGURED ***')
+    console.dir('** MIDDLEWARE CONFIGURED ***')
     app.use(express.json());
     app.use(morgan('common'));
     app.use(cors({

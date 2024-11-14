@@ -65,7 +65,12 @@
                         <small class="d-block">Sign-in</small>
                         <div class="auth-div px-3 pt-2">
                             <ul id="authentication" class="list-unstyled">
-                                <li class="mb-2">Sign in</li>
+                                <li class="mb-2">
+                                    <a class="nav-link active  d-flex flex-column justify-content-center align-items-center"
+                                        [routerLink]="['/authentication', 'signin']">
+                                        Sign in
+                                    </a>
+                                </li>
                                 <li class="mb-2">
                                     <a class="nav-link active  d-flex flex-column justify-content-center align-items-center"
                                         [routerLink]="['/authentication', 'signup']">

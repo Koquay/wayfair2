@@ -2,7 +2,7 @@ require("./product.model");
 const Product = require("mongoose").model("Product");
 
 exports.getProducts = async (req, res) => {
-    console.log("ProductsService.getProducts");
+    console.dir("ProductsService.getProducts");
   
     const sidenavFiltersStr = req.query.sidenavFilters;
   
@@ -15,21 +15,21 @@ exports.getProducts = async (req, res) => {
     } else {
       sidenavFilters = [];
     }
-    console.log("sidenavFilters", sidenavFilters);
+    console.dir("sidenavFilters", sidenavFilters);
   
     const aggregatePipeline = buildAggregatePipeline(
       sidenavFilters,
       productCountPipeline
     );
-    console.log("aggregatePipeline", aggregatePipeline);
+    console.dir("aggregatePipeline", aggregatePipeline);
   
-    console.log("aggregatePipeline", JSON.stringify(aggregatePipeline));
+    console.dir("aggregatePipeline", JSON.stringify(aggregatePipeline));
   
     try {
       const products = await Product.aggregate(aggregatePipeline);
-      console.log("products", products);
+      console.dir("products", products);
       const productCount = await getProductCount(productCountPipeline);
-      console.log("productCount", productCount);
+      console.dir("productCount", productCount);
       res.status(200).json({ products, productCount });
     } catch (error) {
       console.error(error);
@@ -47,7 +47,7 @@ exports.getProducts = async (req, res) => {
       sortFilter,
     } = filters;
     
-    console.log("categories", categories);
+    console.dir("categories", categories);
   
     let aggregatePipeline = [];
   

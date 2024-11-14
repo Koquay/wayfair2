@@ -41,10 +41,10 @@ export class CheckoutService {
   }
 
   public placeOrder = () => {
-    this.checkoutSignal.set({checkoutData: {...this.checkoutSignal().checkoutData, items: this.cartItems} })
+    this.checkoutSignal.set({checkoutData: {...this.checkoutSignal().checkoutData, items: this.cartService.cartSignal().cartItems} })
     console.dir('PlaceOrder.checkoutSignal', this.checkoutSignal())
 
-    this.httpClient.post(this.url, {orderData: this.checkoutSignal()}).pipe(
+    this.httpClient.post(this.url, {orderData: this.checkoutSignal().checkoutData}).pipe(
       tap(order => {
         console.log('new order', order)
         this.toastr.success('Order successfully placed.', 'Place Order')

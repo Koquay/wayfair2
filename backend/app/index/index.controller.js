@@ -1,6 +1,6 @@
 exports.redirectFrontendHome = (req, res) => {
     try {
-        console.log('INDEX CONTROLLER')
+        console.dir('INDEX CONTROLLER')
         res.sendFile(process.env.INDEX)
     } catch(error) {
         throw error;

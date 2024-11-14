@@ -12,5 +12,5 @@ configureMongodb();
 const PORT = process.env.PORT || process.env.LOCAL_PORT || '4200'
 
 app.listen(PORT, () => {
-    console.log(`Wayfair listening on port ${PORT}`)
+    console.dir(`Wayfair listening on port ${PORT}`)
 })

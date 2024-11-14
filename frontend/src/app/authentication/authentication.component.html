@@ -1,7 +1,7 @@
-<div class="container d-flex justify-content-center mt-3" style="">
-    <section id="signup" class="p-4" style="border: 1px solid #8b34ab ;">
+<div class="container d-flex justify-content-center mt-3">
+    <section *ngIf="action === 'signup'" id="signup" class="p-5" style="border: 1px solid #8b34ab ;">
         <h4>Sign up</h4>
-        <form #signupForm="ngForm">
+        <form #signupForm="ngForm" class="mt-4">
             <div class="row d-flex mb-2">
                 <div class="col col-4 col-md-3">
                     <label class="col-form-label">First Name:</label>
@@ -64,52 +64,24 @@
             <div class="row mt-4">
                 <div class="col">
                     <span class="me-2">Have an account?</span>
-                    <a class="fw-bold" style="color: var(--bs-link-hover-color) !important;">Sign In</a>
+                    <a class="fw-bold" style="color: var(--bs-link-hover-color) !important;"
+                        [routerLink]="['/authentication', 'signin']">
+                        Sign In</a>
                 </div>
             </div>
             <div class="mt-4">
                 <button class="btn btn-light me-4" type="button"
                     style="border: 2px solid #8b34ab;color: #8b34ab;">Close</button>
                 <button class="btn btn-primary fw-bold" type="button" style="background: #8b34ab;"
-                    (click)="signup()">Sign Up</button>
+                    [disabled]="!signupForm.valid" (click)="signup()">Sign Up</button>
                 <!-- [disabled]="!signupForm.valid" (click)="signup()">Sign Up</button> -->
             </div>
         </form>
     </section>
 
-    <section id="signup" class="p-4" style="border: 1px solid #8b34ab ;">
+    <section *ngIf="action === 'signin'" id="signin" class="p-5" style="border: 1px solid #8b34ab ;">
         <h4>Sign In</h4>
-        <form #signinForm="ngForm">
-            <!-- <div class="row d-flex mb-2">
-                <div class="col col-4 col-md-3">
-                    <label class="col-form-label">First Name:</label>
-                </div>
-                <div class="col col-8">
-                    <input class="form-control" type="text" name="firstName" required=""
-                        [(ngModel)]="authData.firstName" name="firstName" #firstName="ngModel"
-                        style="border-width: 2px;border-style: solid;">
-                    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
-                        <div *ngIf="firstName.hasError('required')">
-                            <small class="red">First Name is required.</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row d-flex mb-2">
-                <div class="col col-4 col-md-3">
-                    <label class="col-form-label">Last Name:</label>
-                </div>
-                <div class="col col-8">
-                    <input class="form-control" type="text" name="lastName" required="" [(ngModel)]="authData.lastName"
-                        name="lastName" #lastName="ngModel" style="border-width: 2px;border-style: solid;">
-                    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
-                        <div *ngIf="lastName.hasError('required')">
-                            <small class="red">last Name is required.</small>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
+        <form #signinForm="ngForm" class="mt-4">
             <div class="row d-flex mb-2">
                 <div class="col col-4 col-md-3">
                     <label class="col-form-label">Email:</label>
@@ -142,15 +114,17 @@
             <div class="row mt-4">
                 <div class="col">
                     <span class="me-2">Don't have an account?</span>
-                    <a class="fw-bold" style="color: var(--bs-link-hover-color) !important;">Sign Up</a>
+                    <a class="fw-bold" style="color: var(--bs-link-hover-color) !important;"
+                        [routerLink]="['/authentication', 'signup']">
+                        Sign Up</a>
                 </div>
             </div>
             <div class="mt-4">
                 <button class="btn btn-light me-4" type="button"
                     style="border: 2px solid #8b34ab;color: #8b34ab;">Close</button>
                 <button class="btn btn-primary fw-bold" type="button" style="background: #8b34ab;"
-                    (click)="signin()">Sign In</button>
-                <!-- [disabled]="!signupForm.valid" (click)="signup()">Sign Up</button> -->
+                    [disabled]="!signinForm.valid" (click)="signin()">Sign In</button>
+                <!-- [disabled]="!signinForm.valid" (click)="signup()">Sign Up</button> -->
             </div>
         </form>
     </section>
