@@ -1,0 +1,58 @@
+<div class="table-responsive">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr *ngFor="let item of cartItems">
+                <td>
+                    <img class="img-fluid mb-2" src="assets/img/{{item.product.images[0]}}" style="width: 268px;">
+                </td>
+                <td>
+                    <h6 class="mb-2">{{item.product.name}}</h6>
+                    <div class="mb-2">
+                        <span [createRatingStars]="item.product.rating">
+                            <span>
+
+                            </span>
+                        </span>
+                    </div>
+                </td>
+                <td class="text-end" style="text-align: right;">
+                    <div class="mb-3">
+                        <h4 class="d-inline-block">
+                            {{item.product.price | discountPrice:item.product.discount}}
+                        </h4>
+                        <small class="d-inline-block ms-2 text-decoration-line-through">
+                            {{item.product.price | currency}}
+                        </small>
+                    </div>
+                    <div class="d-sm-flex justify-content-sm-end mb-3" style="text-align: right;">
+                        <div class="input-group text-center" style="width: 109.3px;">
+                            <button class="btn btn-light btn-sm" type="button"
+                                (click)="decreaseProductQuantity(item.product._id, item.quantity)"
+                                style="border-color: #7b189f;">
+                                <i class="fa fa-minus" style="color: #7b189f;">
+                                </i>
+                            </button>
+                            <input class="form-control d-flex d-md-flex text-center" type="text" name="quantity"
+                                [(ngModel)]="item.quantity" readonly="" style="border-color: #7b189f;">
+                            <button class="btn btn-light btn-sm" type="button"
+                                (click)="increaseProductQuantity(item.product._id)" style="border-color: #7b189f;">
+                                <i class="fa fa-plus" style="color: #7b189f;">
+                                </i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <a class="d-block" style="color: #7b189f;">
+                            <i class="fa fa-download">
+                            </i>&nbsp;Save for later</a>
+                        <a class="d-block" style="color: red !important;"
+                            (click)="removeItemFromCart(item.product._id)">
+                            <i class="fa fa-trash">
+
+                            </i>&nbsp;Remove</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

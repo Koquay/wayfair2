@@ -1,0 +1,26 @@
+<div style="position: relative;">
+    <div class="input-group" style="width: 501.2px;">
+        <input class="form-control" type="text" [(ngModel)]="searchField" placeholder="Search products...">
+        <div class="input-group-text input-group-append me-1" [ngClass]="{'d-none': !searchField }">
+            <i (click)="clearSearchbox()" class="fa fa-times" style="width: 6px;font-size: 1.4rem;color: red;"></i>
+        </div>
+        <div class="input-group-text input-group-append p-0">
+            <button (click)="search()" class="btn btn-primary primary-bg-color search-button" type="button">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+
+    <ol class="list-group d-block w-100"
+        style=" position: absolute; top: 10; left: 0; z-index: 10; height: 500px; overflow-y: scroll;"
+        *ngIf="showSearchResult">
+
+        <li key="{item}" [routerLink]="['/selected-product', product._id]" (click)="clearSearchbox()"
+            class="py-1 px-2 list-group-item list-group-item-warning" style="border: 1px solid"
+            *ngFor="let product of searchResults">
+            <small style="cursor: pointer;">{{
+                product.name
+                }}</small>
+        </li>
+    </ol>
+</div>

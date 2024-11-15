@@ -1,4 +1,4 @@
-import { effect, inject, Injectable, signal, untracked } from '@angular/core';
+import { computed, effect, inject, Injectable, signal, untracked } from '@angular/core';
 import { AuthenticationModel } from './authentication.model';
 import { catchError, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -17,6 +17,10 @@ export class AuthenticationService {
   private httpClient = inject(HttpClient)
   private toastr = inject(ToastrService);
   private url = '/api/auth';  
+
+  public lastNameSignal = computed(() => {
+    return this.authSignal().auth.lastName;
+  });
   
 
   private appEffect = effect(() => {    
@@ -70,5 +74,10 @@ export class AuthenticationService {
         throw error;
       })   
     )
+  }
+
+  public signout = () => {
+    this.authSignal.set({auth: new AuthenticationModel()})
+    saveStateToLocalStorage(this.authSignal())
   }
 }

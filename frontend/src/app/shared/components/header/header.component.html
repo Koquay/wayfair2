@@ -28,29 +28,7 @@
             <div class="collapse navbar-collapse" id="navcol-3">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <div class="input-group" style="width: 501.2px;">
-                            <input class="form-control" type="text">
-                            <button class="btn" type="button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                                    viewBox="0 0 16 16" class="bi bi-x fw-bolder"
-                                    style="font-size: 25px;color: var(--bs-danger);">
-                                    <path
-                                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708">
-
-                                    </path>
-                                </svg>
-                            </button>
-                            <button class="btn btn-light" type="button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                                    viewBox="0 0 16 16" class="bi bi-search fw-bolder"
-                                    style="font-size: 17px;color: var(--bs-navbar-active-color);">
-                                    <path
-                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0">
-
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
+                        <app-product-search />
                     </li>
                 </ul>
                 <a class="me-2 position-relative" href="#">
@@ -62,22 +40,27 @@
 
                             </path>
                         </svg>
-                        <small class="d-block">Sign-in</small>
+                        <small class="d-block">{{lastName || 'Sign-in'}}</small>
                         <div class="auth-div px-3 pt-2">
                             <ul id="authentication" class="list-unstyled">
-                                <li class="mb-2">
+                                <li *ngIf="!lastName" class="mb-2">
                                     <a class="nav-link active  d-flex flex-column justify-content-center align-items-center"
                                         [routerLink]="['/authentication', 'signin']">
                                         Sign in
                                     </a>
                                 </li>
-                                <li class="mb-2">
+                                <li *ngIf="!lastName" class="mb-2">
                                     <a class="nav-link active  d-flex flex-column justify-content-center align-items-center"
                                         [routerLink]="['/authentication', 'signup']">
                                         Sign up
                                     </a>
                                 </li>
-                                <li>Sign out</li>
+                                <li *ngIf="lastName">
+                                    <a class="nav-link active  d-flex flex-column justify-content-center align-items-center"
+                                        (click)="signout()">
+                                        Sign out
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -91,7 +74,9 @@
 
                             </path>
                         </svg>
-                        <small class="d-block">Cart(2)</small>
+                        <small class="d-block">Cart<span class="badge ms-1"
+                                style="background: #8b34ab !important;">{{numberOfItems}}</span>
+                        </small>
                     </div>
                 </a>
             </div>

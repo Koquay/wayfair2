@@ -1,5 +1,5 @@
 import { Component, effect, inject, untracked } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ProductService } from '../product.service';
 import { ProductModel } from '../product.model';
 import { FormsModule } from '@angular/forms';
@@ -25,6 +25,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SelectedProductComponent {
   private activatedRoute = inject(ActivatedRoute)
+  private router = inject(Router)
   private productService = inject(ProductService)
   private cartService = inject(CartService)
   private toastr = inject(ToastrService)
@@ -34,6 +35,18 @@ export class SelectedProductComponent {
   public quantity = 1;
 
   public appService = inject(AppService)
+
+  constructor() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+        this.router.navigated = false;
+      }
+    });
+  }
 
   ngOnInit() {
     this.getSelectedProduct();
